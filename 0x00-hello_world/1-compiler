@@ -1,0 +1,2 @@
+#!/bin/bash
+gcc -C $CFILE -o 'echo $CFILE | cute -d. -f1'.o
