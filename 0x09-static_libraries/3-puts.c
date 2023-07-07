@@ -5,9 +5,14 @@
 #include <string.h>
 /**
  * _puts - prints a string, followed by a new line, to stdout
- * @s: string to print
+ * @str: string to print
 */
-void _puts(char *s)
+void _puts(char *str)
 {
-	puts(s);
+	while (*str != '\0')
+	{
+		putchar(*str);
+		str++;
+	}
+	putchar('\n');
 }
