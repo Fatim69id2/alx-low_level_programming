@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("O\n");
+		printf("0\n");
 	}
 	return (0);
 }
