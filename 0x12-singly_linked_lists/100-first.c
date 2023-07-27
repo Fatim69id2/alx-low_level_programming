@@ -1,18 +1,17 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
 
 /**
- * _fre_list - Realease the memory allocated for a list
- * @head: A pointer to the first node of the list to free
+ * printMessageBeforeMain - Apply the constructor attribute to
+ * printMessageBeforeMain() so that it
+ *   is executed before main()
 */
-void _fre_list(list_t *head)
+void printMessageBeforeMain(void) __attribute__((constructor));
+
+void printMessageBeforeMain(void)
 {
-	if (head)
-	{
-		_fre_list(head->next);
-		if (head->str)
-			free(head->str);
-		free(head);
-	}
+	printf("You're beat! and yet, you must allow,\n");
+	printf(" I bore my house upon my back!\n");
+	printf("A tortoise, having pretty good sense of a hare's nature");
+	printf("challenges one to a race.\n");
 }
