@@ -6,8 +6,8 @@
  * @head: Double pointer
  * @index: Index of node
  * Return: Pointer to the index node
- */
- int delete_nodeint_at_index(listint_t **head, unsigned int index)
+*/
+int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
 	unsigned int j;
 	listint_t *c, *next;
