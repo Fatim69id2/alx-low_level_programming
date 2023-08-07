@@ -44,14 +44,14 @@ int main(int argc, char *argv[])
 	with_error(code, file, argv);
 
 	x = 1024;
-	while ((x = read(code, w, 1024)) >= 0)
+	while (x == 1024)
 	{
-		if (x == 0)
-		break;
-
+		x = read(code, w, 1024);
+		if (x == -1)
+			with_error(-1, 0, argv);
 		y = write(file, w, x);
 		if (y == -1)
-		with_error(0, -1, argv);
+			with_error(0, -1, argv);
 	}
 	err_close = close(code);
 	if (err_close == -1)
