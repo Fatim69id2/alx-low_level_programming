@@ -2,11 +2,31 @@
 #include <stdio.h>
 
 /**
+ * with_error - Checks if files can be opened
+ * @code: Code
+ * @file: File
+ * @argv: Arguments vector
+ * Return: NULL
+ */
+void with_error(int code, int file, char *argv[])
+{
+	if (code == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
+	if (file == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
+	}
+}
+/**
  * main - Copies the content of a file to another file
  * @argc: Number of arguments passed
  * @argv: Double pointer
  * Return: 0
-*/
+ */
 int main(int argc, char *argv[])
 {
 	int code, file, err_close;
@@ -24,16 +44,15 @@ int main(int argc, char *argv[])
 	with_error(code, file, argv);
 
 	x = 1024;
-	while (x == 1024)
+	while ((x = read(code, w, 1024)) >= 0)
 	{
-		x = read(code, w, 1024);
-		if (x == -1)
-			with_error(-1, 0, argv);
+		if (x == 0)
+		break;
+
 		y = write(file, w, x);
 		if (y == -1)
-			with_error(0, -1, argv);
+		with_error(0, -1, argv);
 	}
-
 	err_close = close(code);
 	if (err_close == -1)
 	{
@@ -48,24 +67,4 @@ int main(int argc, char *argv[])
 		exit(100);
 	}
 	return (0);
-}
-/**
- * with_error - Checks if files can be opened
- * @code: Code
- * @file: File
- * @argv: Arguments vector
- * Return: NULL
-*/
-void with_error(int code, int file, char *argv[])
-{
-	if (code == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-	if (file == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		exit(99);
-	}
 }
